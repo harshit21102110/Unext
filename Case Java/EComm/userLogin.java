@@ -100,8 +100,10 @@ public class userLogin {
 				System.out.println("Log-In to enter");
 				continue;
 
-			} else {
+			} else if (choice == 3) {
 				s.showProductdetails();
+			} else {
+				System.out.println("Enter correct choice");
 			}
 
 			System.out.println("If wanted to go back press y ,else press any key");

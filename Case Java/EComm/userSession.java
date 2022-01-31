@@ -146,20 +146,35 @@ public class userSession {
 			PreparedStatement statement = conn.prepareStatement(showUserDetailString);
 			statement.setString(1, userId);
 			ResultSet rs = statement.executeQuery();
-			System.out.println("User details");
-
+			System.out.println(String.format("%55s", "User details"));
+			System.out.println();
+			System.out.println(
+					String.format("%20s %10s %20s %10s %20s", "User Id", "|", "User Name", "|", "Phone Number"));
+			System.out.println(
+					"--------------------------------------------------------------------------------------------");
 			while (rs.next()) {
-				System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " ");
+
+				System.out.println(String.format("%20s %10s %20s %10s %20s", rs.getString(1), "|", rs.getString(2), "|",
+						rs.getInt(3)));
+
 			}
 
 			statement = conn.prepareStatement(showUserDetailAddressString);
 			statement.setString(1, userId);
 			rs = statement.executeQuery();
-			System.out.println("Address details");
+			System.out.println();
+			System.out.println(String.format("%90s", "Address details"));
+			System.out.println();
+			System.out.println(String.format(" %20s %5s %20s %5s %20s %5s %20s %5s %20s %5s %20s", "User Id", "|",
+					"Locality", "|", "State", "|", "Country", "|", "Credit Card Info", "|", "Pin Code"));
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 			while (rs.next()) {
-				System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " "
-						+ rs.getString(4) + "" + rs.getInt(5) + " " + rs.getInt(6));
+				System.out.println(
+						String.format("%20.5s %5.5s %20.5s %5.5s %20.5s %5.5s %20.5s %5.5s %20.5s %5.5s %20.5s",
+								rs.getString(1), "|", rs.getString(2), "|", rs.getString(3), "|", rs.getString(4), "|",
+								rs.getInt(5), "|", rs.getInt(6)));
 			}
 
 			ds.closePrepaerdStatement(statement);

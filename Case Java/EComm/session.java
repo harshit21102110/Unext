@@ -20,13 +20,13 @@ public class session {
 			}
 			PreparedStatement statement = conn.prepareStatement("Select productId,pName,price,pType from product");
 
-			System.out.println(String.format("%12s %23s %10s %23s %25s %25s %10s", "Product Id", "|", "Product Name",
+			System.out.println(String.format("%20s %10s %20s %10s %20s %10s %20s", "Product Id", "|", "Product Name",
 					"|", "Price", "|", "Product Type"));
 			System.out.println(String.format("%s",
 					"-----------------------------------------------------------------------------------------------------------------------------------------------------"));
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				System.out.println(String.format("%10s %25s %10s %25s %25s %25s %10s", rs.getString(1), "|",
+				System.out.println(String.format("%20s %10s %20s %10s %20s %10s %20s", rs.getString(1), "|",
 						rs.getString(2), "|", rs.getInt(3), "|", rs.getString(4)));
 
 			}
