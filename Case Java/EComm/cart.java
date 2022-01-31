@@ -66,6 +66,7 @@ public class cart {
 		}
 
 		System.out.println("The Item Sucessfully added to the cart");
+
 	}
 
 	void removeFromCart(String productId) {

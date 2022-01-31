@@ -13,7 +13,7 @@ public class userSession {
 	private String deleteUserAddressString = "delete from address where userId=?";
 	private String showUserDetailString = "select * from user where userId =?";
 	private String showUserDetailAddressString = "select * from address where userId =?";
-	private String showPastOrderString = "Select * from orders where userId=?";
+	private String showPastOrderString = "Select * from orders where userId=? order by dateOfOrder desc";
 
 	private dataSource ds;
 	private Connection conn;
@@ -131,32 +131,6 @@ public class userSession {
 			return false;
 		}
 
-	}
-
-	public boolean deleteUser(String userId) {
-		try {
-			if (ds == null) {
-				ds = new dataSource();
-			}
-			if (conn == null) {
-				conn = ds.getConnection();
-			}
-
-			PreparedStatement statement = conn.prepareStatement(deleteUserAddressString);
-			statement.setString(1, userId);
-			statement.executeUpdate();
-			statement = conn.prepareStatement(deleteUserString);
-			statement.setString(1, userId);
-			statement.executeUpdate();
-			ds.closePrepaerdStatement(statement);
-			System.out.println("User sucesfully deleted");
-			return true;
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("The user cannot be updated " + e.getLocalizedMessage());
-			return false;
-		}
 	}
 
 	public void showUserDetails(String userId) {

@@ -84,13 +84,36 @@ public class session {
 			cItems.setProductId(rs.getString(1));
 			cItems.setPrice(rs.getInt(2));
 			cItems.setProductName(rs.getString(3));
-
 			return cItems;
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Cannot get details => " + e.getLocalizedMessage());
 			return null;
+		}
+
+	}
+
+	void addReview(String userId, String productId, String review) {
+		try {
+			if (ds == null) {
+				ds = new dataSource();
+			}
+			if (conn == null) {
+				conn = ds.getConnection();
+			}
+
+			PreparedStatement statement = conn.prepareStatement("Insert into reviews values(?,?,?)");
+			statement.setString(1, userId);
+			statement.setString(2, productId);
+			statement.setString(3, review);
+
+			statement.executeUpdate();
+			ds.closePrepaerdStatement(statement);
+			System.out.println("Review sucessfully posted");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Cannot post reviews => " + e.getLocalizedMessage());
 		}
 
 	}
