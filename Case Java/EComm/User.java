@@ -4,7 +4,7 @@ public class User extends address {
 
 	private String userId;
 	private String name;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String password;
 
 	public String getUserId() {
@@ -23,11 +23,11 @@ public class User extends address {
 		this.name = name;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

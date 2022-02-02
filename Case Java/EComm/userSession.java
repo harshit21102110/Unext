@@ -30,7 +30,7 @@ public class userSession {
 			PreparedStatement statement = conn.prepareStatement(addUserString);
 			statement.setString(1, user.getUserId());
 			statement.setString(2, user.getName());
-			statement.setInt(3, user.getPhoneNumber());
+			statement.setString(3, user.getPhoneNumber());
 			statement.setString(4, user.getPassword());
 			statement.executeUpdate();
 
@@ -122,7 +122,9 @@ public class userSession {
 			statement.executeUpdate();
 
 			ds.closePrepaerdStatement(statement);
+			System.out.println();
 			System.out.println("User sucesfully updated");
+			System.out.println();
 			return true;
 
 		} catch (Exception e) {
@@ -155,7 +157,7 @@ public class userSession {
 			while (rs.next()) {
 
 				System.out.println(String.format("%20s %10s %20s %10s %20s", rs.getString(1), "|", rs.getString(2), "|",
-						rs.getInt(3)));
+						rs.getString(3)));
 
 			}
 
@@ -178,6 +180,7 @@ public class userSession {
 			}
 
 			ds.closePrepaerdStatement(statement);
+			System.out.println();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -207,19 +210,48 @@ public class userSession {
 				return;
 			}
 			rs.beforeFirst();
-			System.out.println(String.format("%30s %25s %10s %25s %10s %23s %10s  %25s %10s %25s %10s", "User Id", "|",
+			System.out.println(String.format("%25s %5s %25s %5s %25s %5s %25s  %5s %25s %5s %25s", "User Id", "|",
 					"Product Id", "|", "Product Name", "|", "Price", "|", "Quantity", "|", "Date of Order"));
 			System.out.println(String.format("%s",
 					"--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
 			while (rs.next()) {
-				System.out.println(rs.getString(1) + "|" + rs.getString(2) + "|" + rs.getString(3) + "|" + rs.getInt(4)
-						+ "|" + rs.getInt(5) + "|" + rs.getString(6));
+				System.out.println(String.format("%25s %5s %25s %5s %25s %5s %25s  %5s %25s %5s %25s", rs.getString(1),
+						"|", rs.getString(2), "|", rs.getString(3), "|", rs.getInt(4), "|", rs.getInt(5), "|",
+						rs.getString(6)));
 			}
+			System.out.println();
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Cannot show past orders => " + e.getLocalizedMessage());
 		}
 
+	}
+
+	public void deleteUser(String userId) {
+		try {
+
+			if (ds == null) {
+				ds = new dataSource();
+			}
+			if (conn == null) {
+				conn = ds.getConnection();
+			}
+
+			PreparedStatement statement = conn.prepareStatement("Delete from user where userId = ?");
+			statement.setString(1, userId);
+
+			statement.executeUpdate();
+
+			ds.closePrepaerdStatement(statement);
+			System.out.println();
+			System.err.println("User sucesfully Deleted Signing you Out ");
+			System.out.println();
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Item Cannot be deleted = >" + e.getLocalizedMessage());
+
+		}
 	}
 }

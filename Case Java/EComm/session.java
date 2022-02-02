@@ -3,10 +3,69 @@ package ecommerce;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Scanner;
 
 public class session {
 	private dataSource ds;
 	private Connection conn;
+
+	public void showReviews() {
+
+		try {
+			Scanner scanner = new Scanner(System.in);
+			showProductdetails();
+
+			System.out.println("Enter the Product ID to see the reviers");
+			String productId = scanner.next();
+
+			if (ds == null) {
+				ds = new dataSource();
+			}
+			if (conn == null) {
+				conn = ds.getConnection();
+			}
+			PreparedStatement statement = conn.prepareStatement("Select * from reviews where productId=?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+			statement.setString(1, productId);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next() == false) {
+				System.out.println();
+				System.out.println("No Reviews for this product ");
+				System.out.println();
+				return;
+			}
+
+			PreparedStatement statement2 = conn.prepareStatement("Select pName from product where productId=?");
+			statement2.setString(1, productId);
+			ResultSet rs2 = statement2.executeQuery();
+			rs2.next();
+
+			String pNmaeString = rs2.getString(1);
+			System.out.println(pNmaeString);
+			System.out
+					.println(String.format("%20s %10s %20s %10s %70s", "User Id", "|", "Product Name", "|", "Review"));
+			System.out.println(String.format("%s",
+					"-----------------------------------------------------------------------------------------------------------------------------------------------------"));
+
+			rs.beforeFirst();
+			while (rs.next()) {
+				System.out.println(String.format("%20s %10s %20s %10s %50s", rs.getString(1), "|", pNmaeString, "|",
+						rs.getString(3)));
+
+			}
+
+			System.out.println();
+
+			ds.closePrepaerdStatement(statement2);
+			ds.closePrepaerdStatement(statement);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error while showing reviews " + e.getMessage());
+		}
+
+	}
 
 	public void showProductdetails() {
 

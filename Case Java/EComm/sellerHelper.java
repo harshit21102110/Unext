@@ -34,8 +34,11 @@ public class sellerHelper {
 			}
 			rs.beforeFirst();
 
+			System.out.println(String.format("%90s", "Products Offered by you"));
 			System.out.println(String.format("%20s %5s %20s %5s %20s %5s %20s %5s %20s", "productId", "|", "pName", "|",
 					"Price", "|", "stock", "|", "Product Type"));
+			System.out.println(
+					"------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println();
 			while (rs.next()) {
 				System.out.println(String.format("%20s %5s %20s %5s %20s %5s %20s %5s %20s", rs.getString(1), "|",
@@ -212,7 +215,7 @@ public class sellerHelper {
 			statement.setString(1, user.getSellerId());
 			statement.setString(2, user.getSellerName());
 			statement.setString(3, user.getAddress());
-			statement.setInt(4, user.getPhoneNumber());
+			statement.setString(4, user.getPhoneNumber());
 			statement.setString(5, user.getPassword());
 			statement.executeUpdate();
 

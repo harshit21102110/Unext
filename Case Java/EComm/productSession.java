@@ -33,7 +33,8 @@ public class productSession {
 						System.out.println("Press 1 to Add Product");
 						System.out.println("Press 2 to Update Price");
 						System.out.println("Press 3 to Update Quantity ");
-						System.out.println("Press 4 to Log-Out");
+						System.out.println("Press 4 to show offered products");
+						System.out.println("Press 5 to Log-Out");
 
 						int userLoginChoice = sc.nextInt();
 						switch (userLoginChoice) {
@@ -47,6 +48,9 @@ public class productSession {
 							uh.updateQuantity(userIdString);
 							break;
 						case 4:
+							uh.showProduct(userIdString);
+							break;
+						case 5:
 							ls = 6;
 							break;
 						default:
@@ -65,7 +69,7 @@ public class productSession {
 				System.out.println("Enter Name: ");
 				user.setSellerName(sc.nextLine());
 				System.out.println("Enter Phone Number: ");
-				user.setPhoneNumber(sc.nextInt());
+				user.setPhoneNumber(sc.next());
 				System.out.println("Enter Password : ");
 				user.setPassword(sc.next());
 				sc.nextLine();

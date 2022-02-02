@@ -40,8 +40,9 @@ public class userLogin {
 						System.out.println("Press 3 to View Previous Orders ");
 						System.out.println("Press 4 to Add Reviews");
 						System.out.println("Press 5 to View User Details");
-						System.out.println("Press 6 to Log-Out");
-
+						System.out.println("Press 6 to  View Reviews");
+						System.out.println("Press 7 to Log Out  ");
+						System.out.println("Press 8 to permanently delete account");
 						int userLoginChoice = sc.nextInt();
 						switch (userLoginChoice) {
 						case 1:
@@ -58,7 +59,15 @@ public class userLogin {
 							break;
 						case 5:
 							uSession.showUserDetails(userIdString);
+							break;
 						case 6:
+							s.showReviews();
+							break;
+						case 7:
+							ls = 6;
+							break;
+						case 8:
+							uSession.deleteUser(userIdString);
 							ls = 6;
 							break;
 						default:
@@ -77,7 +86,7 @@ public class userLogin {
 				System.out.println("Enter Name: ");
 				user.setName(sc.nextLine());
 				System.out.println("Enter Phone Number: ");
-				user.setPhoneNumber(sc.nextInt());
+				user.setPhoneNumber(sc.next());
 				System.out.println("Enter Password : ");
 				user.setPassword(sc.next());
 				sc.nextLine();

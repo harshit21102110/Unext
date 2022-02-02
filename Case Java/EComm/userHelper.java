@@ -10,13 +10,15 @@ public class userHelper {
 		char lo = 'n';
 		session s = new session();
 		while (lo == 'n') {
-			System.out.println("--------------Your Current Cart---------------");
+			System.out.println();
+			System.out.println(String.format("%100s", "--------------Your Current Cart---------------"));
 			c.displayCart();
-			System.out.println("--------------Your Current Cart---------------");
+			System.out.println();
 
 			System.out.println("Enter 1 if want to add Items cart");
 			System.out.println("Enetr 2 if want to remove form cart");
 			System.out.println("Enetr 3 if want to order item in cart");
+			System.out.println("Enter 4 to exit the cart without placing order");
 
 			int choice = sc.nextInt();
 
@@ -32,8 +34,10 @@ public class userHelper {
 				c.displayCart();
 				c.removeFromCart(pid);
 
-			} else {
+			} else if (choice == 3) {
 				c.orderProducts();
+				lo = 'y';
+			} else {
 				lo = 'y';
 			}
 
